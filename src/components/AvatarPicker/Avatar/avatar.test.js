@@ -3,5 +3,8 @@ import { shallow } from 'enzyme';
 import Avatar from './';
 
 describe('Avatar component', () => {
-  test('', () => {});
+  test('Avatar rendered', () => {
+    const wrapper = shallow(<Avatar image="" />);
+    expect(wrapper.children.length).toEqual(1);
+  });
 });

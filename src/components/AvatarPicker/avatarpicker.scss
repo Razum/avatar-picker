@@ -3,24 +3,6 @@
   position: relative;
 }
 
-
-.list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: stretch;
-  margin: 0 -7px;
-
-  > li {
-    display: inline-block;
-    text-align: center;
-    margin: 7px;
-  }
-}
-
 .header {
   font-size: 16px;
   font-family: 'Source Sans Pro', sans-serif;

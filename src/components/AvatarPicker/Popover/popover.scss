@@ -1,6 +1,7 @@
 .popover {
   width: 285px;
   position: absolute;
+  z-index: 100;
   left: 50%;
   bottom: -10px;
   transform: translate(-50%, 100%) scale(0);
@@ -24,6 +25,16 @@
     border-width: 0 8px 8px 8px;
     border-color: transparent transparent rgb(44, 48, 51) transparent;
   }
+}
+
+.bg {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 99;
 }
 
 @keyframes bounce {

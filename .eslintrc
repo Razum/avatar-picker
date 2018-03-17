@@ -18,6 +18,8 @@
     "node": true
   },
   "globals": {
+    "test": true,
+    "jest": true,
     "describe": true,
     "it": true,
     "xdescribe": true,
@@ -28,6 +30,9 @@
     "React": true
   },
   "rules": {
-    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "linebreak-style": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/click-events-have-key-events": 0
   }
 }

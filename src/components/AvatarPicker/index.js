@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import style from './avatarpicker.scss';
 
 import Avatar from './Avatar';
+import AvatarList from './AvatarList';
 import PopOver from './Popover';
 
 class AvatarPicker extends PureComponent {
   constructor(props) {
     super();
     this.state = {
-      selected: props.avatars[0],
+      selectedAvatar: props.avatars[0],
       isOpen: false,
     };
   }
@@ -24,27 +25,30 @@ class AvatarPicker extends PureComponent {
 
   togglePopOver = (isOpen) => {
     this.setState(currState => ({ ...currState, isOpen: typeof isOpen !== 'undefined' ? isOpen : !currState.isOpen }));
+    this.avatar.setFocus();
+  }
+
+  selectAvatar = (avatar) => {
+    this.setState({ selectedAvatar: avatar });
   }
 
   render() {
     const { avatars } = this.props;
-    const { isOpen } = this.state;
+    const { isOpen, selectedAvatar } = this.state;
     return (
       <div className={style.avatarpicker}>
-        <Avatar image={this.state.selected.src} onClick={() => this.togglePopOver()} />
+        <Avatar
+          ref={(avatar) => { this.avatar = avatar; }}
+          image={this.state.selectedAvatar.src}
+          onClick={() => this.togglePopOver()}
+        />
         <PopOver isOpen={isOpen} togglePopOver={this.togglePopOver}>
           <div className={style.header}>Choose your avatar</div>
-          <ul className={style.list}>
-            {avatars.map(a => (
-              <li key={a.id}>
-                <Avatar
-                  image={a.src}
-                  onClick={() => this.setState({ selected: a })}
-                  className={style.decorator}
-                />
-              </li>
-            ))}
-          </ul>
+          <AvatarList
+            avatars={avatars}
+            selectedAvatar={selectedAvatar}
+            selectAvatar={this.selectAvatar}
+          />
         </PopOver>
       </div>
     );
