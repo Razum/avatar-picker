@@ -1,17 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { PureComponent } from 'react';
 import './App.scss';
+import AvatarPicker from './components/AvatarPicker';
+import avatars from './assets/avatars';
 
-const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h1 className="App-title">Welcome to React</h1>
-    </header>
-    <p className="App-intro">
-      To get started, edit <code>src/App.js</code> and save to reload.
-    </p>
-  </div>
-);
+class App extends PureComponent {
+  state = {
+    avatars: [
+      { src: avatars.avatar1, label: 'Avatar 1', id: 1 },
+      { src: avatars.avatar2, label: 'Avatar 2', id: 2 },
+      { src: avatars.avatar3, label: 'Avatar 3', id: 3 },
+      { src: avatars.avatar4, label: 'Avatar 4', id: 4 },
+      { src: avatars.avatar5, label: 'Avatar 5', id: 5 },
+      { src: avatars.avatar6, label: 'Avatar 6', id: 6 },
+    ],
+  }
+  render() {
+    return (
+      <div className="App">
+        <div style={{ textAlign: 'center', padding: '50px' }}>
+          <AvatarPicker avatars={this.state.avatars} />
+        </div>
+      </div>
+    );
+  }
+}
+
 
 export default App;
