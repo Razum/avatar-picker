@@ -12,7 +12,7 @@ class PopOver extends PureComponent {
     return (
       <React.Fragment>
         <div className={style.bg} onClick={() => togglePopOver(false)} />
-        <FocusLock>
+        <FocusLock autoFocus={false}>
           <div className={style.popover}>
             {children}
           </div>

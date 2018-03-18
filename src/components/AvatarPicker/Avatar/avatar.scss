@@ -7,15 +7,7 @@
   border-radius: 50%;
   border: none;
   position: relative;
-
-  &:focus,
-  &:hover {
-    outline: 0;
-
-    &:before {
-      border: 1px solid rgb(155, 160, 163);
-    }
-  }
+  cursor: pointer;
 
   &:before {
     content: '';
@@ -28,6 +20,15 @@
     transform: translate(-50%, -50%);
   }
 
+  &:focus,
+  &:hover {
+    outline: 0;
+
+    &:before {
+      border: 1px solid rgb(155, 160, 163);
+    }
+  }
+
   &.selectable {
     &:focus,
     &:hover {
@@ -36,24 +37,19 @@
         background-color: rgba(122, 161, 178, 0.2);
       }
     }
-  }
 
-  &.active {
-    &:before {
-      border: 3px solid rgb(122, 161, 178);
-    }
-  }
-
-  &.loading {
-    &:before {
+    &.loading:before {
       border: 3px solid rgb(122, 161, 178);
       border-bottom-color: transparent;
       animation: rotation 1s linear infinite
     }
   }
+
+  &.active:before {
+    border: 3px solid rgb(122, 161, 178);
+  }
+
 }
-
-
 
 @keyframes rotation {
   from {

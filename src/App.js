@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import './App.scss';
+import style from './App.scss';
 import AvatarPicker from './components/AvatarPicker';
 import avatars from './assets/avatars';
 
@@ -14,12 +14,11 @@ class App extends PureComponent {
       { src: avatars.avatar6, label: 'Avatar 6', id: 6 },
     ],
   }
+
   render() {
     return (
-      <div className="App">
-        <div style={{ textAlign: 'center', padding: '50px' }}>
-          <AvatarPicker avatars={this.state.avatars} />
-        </div>
+      <div className={style.app}>
+        <AvatarPicker avatars={this.state.avatars} />
       </div>
     );
   }

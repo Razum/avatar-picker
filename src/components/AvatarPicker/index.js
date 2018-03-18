@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import style from './avatarpicker.scss';
 
 import Avatar from './Avatar';
@@ -8,9 +9,10 @@ import PopOver from './Popover';
 
 class AvatarPicker extends PureComponent {
   constructor(props) {
-    super();
+    super(props);
     this.state = {
       selectedAvatar: props.avatars[0],
+      loadingAvatarId: null,
       isOpen: false,
     };
   }
@@ -29,12 +31,22 @@ class AvatarPicker extends PureComponent {
   }
 
   selectAvatar = (avatar) => {
-    this.setState({ selectedAvatar: avatar });
+    this.setState({ loadingAvatarId: avatar.id });
+    axios.get(`https://jsonplaceholder.typicode.com/photos?timestamp=${(new Date()).getTime()}`)
+      .then(() => {
+        this.setState({ selectedAvatar: avatar, loadingAvatarId: null });
+        this.togglePopOver();
+      })
+      .catch(e => console.log(e));
   }
 
   render() {
     const { avatars } = this.props;
-    const { isOpen, selectedAvatar } = this.state;
+    const { isOpen, selectedAvatar, loadingAvatarId } = this.state;
+    if (!avatars.length) {
+      return 'No avatars found';
+    }
+
     return (
       <div className={style.avatarpicker}>
         <Avatar
@@ -48,6 +60,7 @@ class AvatarPicker extends PureComponent {
             avatars={avatars}
             selectedAvatar={selectedAvatar}
             selectAvatar={this.selectAvatar}
+            loadingAvatarId={loadingAvatarId}
           />
         </PopOver>
       </div>
@@ -60,7 +73,7 @@ AvatarPicker.propTypes = {
     src: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
     id: PropTypes.number.isRequired,
-  })).isRequired,
+  }).isRequired).isRequired,
 };
 
 export default AvatarPicker;
