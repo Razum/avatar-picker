@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import style from './avatarpicker.scss';
 
 import Avatar from './Avatar';
@@ -32,12 +31,14 @@ class AvatarPicker extends PureComponent {
 
   selectAvatar = (avatar) => {
     this.setState({ loadingAvatarId: avatar.id });
-    axios.get(`https://jsonplaceholder.typicode.com/photos?timestamp=${(new Date()).getTime()}`)
-      .then(() => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve();
         this.setState({ selectedAvatar: avatar, loadingAvatarId: null });
         this.togglePopOver();
-      })
-      .catch(e => console.log(e));
+        reject();
+      }, 1500);
+    });
   }
 
   render() {
