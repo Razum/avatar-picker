@@ -9,7 +9,6 @@ const avatars = [
 ];
 
 describe('AvatarPicker component', () => {
-
   test('should render 2 elements if opened', () => {
     const wrapper = shallow(<AvatarPicker avatars={avatars} />);
     expect(wrapper.children.length).toEqual(1);
@@ -26,7 +25,7 @@ describe('AvatarPicker component', () => {
     expect(wrapper.text()).toEqual('No avatars found');
   });
 
-  test('Should ', async () => {
+  test('Should set avatar as selected and close PopOver', () => {
     jest.useFakeTimers();
     const wrapper = shallow(<AvatarPicker avatars={avatars} />);
     wrapper.instance().togglePopOver = jest.fn();

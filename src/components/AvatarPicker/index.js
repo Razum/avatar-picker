@@ -17,11 +17,17 @@ class AvatarPicker extends PureComponent {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', (evt) => {
-      if (evt.which === 27) {
-        this.togglePopOver(false);
-      }
-    });
+    document.addEventListener('keydown', this.handleKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown);
+  }
+
+  handleKeyDown = (evt) => {
+    if (evt.which === 27) {
+      this.togglePopOver(false);
+    }
   }
 
   togglePopOver = (isOpen) => {
@@ -31,14 +37,10 @@ class AvatarPicker extends PureComponent {
 
   selectAvatar = (avatar) => {
     this.setState({ loadingAvatarId: avatar.id });
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve();
-        this.setState({ selectedAvatar: avatar, loadingAvatarId: null });
-        this.togglePopOver();
-        reject();
-      }, 1500);
-    });
+    setTimeout(() => {
+      this.setState({ selectedAvatar: avatar, loadingAvatarId: null });
+      this.togglePopOver();
+    }, 1500);
   }
 
   render() {
@@ -51,7 +53,9 @@ class AvatarPicker extends PureComponent {
     return (
       <div className={style.avatarpicker}>
         <Avatar
-          ref={(avatar) => { this.avatar = avatar; }}
+          ref={(avatar) => {
+            this.avatar = avatar;
+          }}
           image={this.state.selectedAvatar.src}
           onClick={() => this.togglePopOver()}
         />
